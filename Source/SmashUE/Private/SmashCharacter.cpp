@@ -26,6 +26,5 @@ void ASmashCharacter::Tick(float DeltaTime)
 void ASmashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
