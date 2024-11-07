@@ -1,5 +1,23 @@
 
 #include "SmashCharacter.h"
+
+float ASmashCharacter::GetOrientX() const
+{
+	return OrientX;
+}
+
+void ASmashCharacter::SetOrientX(float NewOrientX)
+{
+	OrientX = NewOrientX;
+}
+
+void ASmashCharacter::RotateMeshUsingOrientX() const
+{
+	FRotator Rotation = GetMesh()->GetRelativeRotation();
+	Rotation.Yaw = -90.0f * OrientX;
+	GetMesh()->SetRelativeRotation(Rotation);
+}
+
 // Sets default values
 ASmashCharacter::ASmashCharacter()
 {
@@ -19,7 +37,7 @@ void ASmashCharacter::BeginPlay()
 void ASmashCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-    
+    RotateMeshUsingOrientX();
 }
 
 // Called to bind functionality to input
