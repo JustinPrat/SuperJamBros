@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -20,18 +18,6 @@ class SMASHUE_API AMatchGameMode : public AGameModeBase
 	protected:
 	UPROPERTY(EditAnywhere)
 	TArray<ASmashCharacter*> CharactersInsideArena;
-	
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ASmashCharacter> SmashCharacterClassP0;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ASmashCharacter> SmashCharacterClassP1;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ASmashCharacter> SmashCharacterClassP2;
-
-	UPROPERTY(EditAnywhere)
-	TSubclassOf<ASmashCharacter> SmashCharacterClassP3;
 	
 	private:
 	void FindPlayerStartActorsInArena(TArray<AArenaPlayerStart*>& ResultsActors);

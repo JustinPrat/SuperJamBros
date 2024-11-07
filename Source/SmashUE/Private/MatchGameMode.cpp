@@ -5,6 +5,7 @@
 #include "SmashCharacter.h"
 #include "Arena/ArenaPlayerStart.h"
 #include "Kismet/GameplayStatics.h"
+#include "ArenaSettings.h"
 
 void AMatchGameMode::BeginPlay()
 {
@@ -63,22 +64,20 @@ void AMatchGameMode::SpawnCharacters(const TArray<AArenaPlayerStart*>& SpawnPoin
 
 TSubclassOf<ASmashCharacter> AMatchGameMode::GetSmashCharacterClassFromInputType(EAutoReceiveInput::Type InputType) const
 {
-	switch (InputType)
-	{
-		case EAutoReceiveInput::Player0:
-			return SmashCharacterClassP0;
+	const UArenaSettings* ArenaSettings = GetDefault<UArenaSettings>();
+
+	switch (InputType) {
+	case EAutoReceiveInput::Player0:
+		return ArenaSettings->SmashCharacterClassP0;
+	case EAutoReceiveInput::Player1:
+		return ArenaSettings->SmashCharacterClassP1;
+	case EAutoReceiveInput::Player2:
+		return ArenaSettings->SmashCharacterClassP2;
+	case EAutoReceiveInput::Player3:
+		return ArenaSettings->SmashCharacterClassP3;
 		
-		case EAutoReceiveInput::Player1:
-			return SmashCharacterClassP1;
-		
-		case EAutoReceiveInput::Player2:
-			return SmashCharacterClassP2;
-		
-		case EAutoReceiveInput::Player3:
-			return SmashCharacterClassP3;
-		
-		default :
-			return nullptr;
+	default:
+		return nullptr;
 	}
 }
 

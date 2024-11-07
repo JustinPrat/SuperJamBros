@@ -1,0 +1,17 @@
+#pragma once
+
+#include "CoreMinimal.h"
+#include "SmashCharacterState.h"
+#include "SmashCharacterStateIdle.generated.h"
+
+UCLASS(ClassGroup=(SmashCharacterState), meta=(BlueprintSpawnableComponent))
+class SMASHUE_API USmashCharacterStateIdle : public USmashCharacterState
+{
+	GENERATED_BODY()
+
+public:
+	virtual ESmashCharacterStateID GetStateID() override;
+
+	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
+	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
+};

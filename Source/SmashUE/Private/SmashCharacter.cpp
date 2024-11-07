@@ -1,6 +1,8 @@
 
 #include "SmashCharacter.h"
 
+#include "SmashCharacterStateMachine.h"
+
 float ASmashCharacter::GetOrientX() const
 {
 	return OrientX;
@@ -30,7 +32,8 @@ ASmashCharacter::ASmashCharacter()
 void ASmashCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	CreateStateMachine();
+	InitStateMachine();
 }
 
 // Called every frame
@@ -44,5 +47,16 @@ void ASmashCharacter::Tick(float DeltaTime)
 void ASmashCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void ASmashCharacter::CreateStateMachine()
+{
+	StateMachine = NewObject<USmashCharacterStateMachine>(this);
+}
+
+void ASmashCharacter::InitStateMachine()
+{
+	if (StateMachine == nullptr) return;
+	StateMachine->Init(this);
 }
 
