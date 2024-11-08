@@ -3,9 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputActionValue.h"
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
 
+class USmashCharacterInputData;
+class UInputMappingContext;
 class USmashCharacterStateMachine;
 
 UCLASS()
@@ -48,10 +51,36 @@ public:
 public:
 	void CreateStateMachine();
 	void InitStateMachine();
+	void TickStateMachine(float DeltaTime) const;
 	
 protected:
 	UPROPERTY(BlueprintReadOnly)
 	TObjectPtr<USmashCharacterStateMachine> StateMachine;
+	
+#pragma endregion
+
+#pragma region Input Data / Mapping Context
+public:
+	UPROPERTY()
+	TObjectPtr<UInputMappingContext> InputMappingContext;
+	UPROPERTY()
+	TObjectPtr<USmashCharacterInputData> InputData;
+
+protected:
+	void SetupMappingContextIntoController() const;
+	
+#pragma endregion
+
+#pragma region Input Move X
+	
+public:
+	float GetInputMoveX() const;
+protected:
+	UPROPERTY()
+	float InputMoveX = 0.0f;
+private:
+	void BindInputMoveXAxisAndActions(UEnhancedInputComponent* EnhancedInputComponent);
+	void OnInputMoveX(const FInputActionValue& InputActionValue);
 	
 #pragma endregion
 };
