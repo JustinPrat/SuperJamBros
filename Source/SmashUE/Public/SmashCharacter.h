@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "CameraFollowTarget.h"
 #include "InputActionValue.h"
 #include "GameFramework/Character.h"
 #include "SmashCharacter.generated.h"
@@ -12,7 +13,8 @@ class UInputMappingContext;
 class USmashCharacterStateMachine;
 
 UCLASS()
-class SMASHUE_API ASmashCharacter : public ACharacter
+class SMASHUE_API ASmashCharacter : public ACharacter,
+									public ICameraFollowTarget
 {
 	GENERATED_BODY()
 
@@ -72,15 +74,41 @@ protected:
 #pragma endregion
 
 #pragma region Input Move X
+
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInputMoveXEvent, float, InputMoveX);
 	
 public:
 	float GetInputMoveX() const;
+	float InputMoveXThreshold = 0;
+
+	UPROPERTY()
+	FInputMoveXEvent InputMoveXFastEvent;
+	
 protected:
 	UPROPERTY()
 	float InputMoveX = 0.0f;
+	
 private:
+	void OnInputMoveXFast(const FInputActionValue& InputActionValue);
 	void BindInputMoveXAxisAndActions(UEnhancedInputComponent* EnhancedInputComponent);
 	void OnInputMoveX(const FInputActionValue& InputActionValue);
 	
+#pragma endregion
+
+#pragma region Jump
+public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FInputJumpEvent, float, InputJump);
+
+	UPROPERTY()
+	FInputJumpEvent InputJumpEvent;
+
+private:
+	void OnInputJump (const FInputActionValue& InputActionValue);
+
+public:
+	virtual FVector GetFollowPosition() override;
+	virtual bool IsFollowable() override;
+
+private:
 #pragma endregion
 };
