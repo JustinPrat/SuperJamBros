@@ -5,6 +5,8 @@
 #include "Subsystems/WorldSubsystem.h"
 #include "CameraWorldSubsystem.generated.h"
 
+class UCameraSettings;
+
 UCLASS()
 class SMASHUE_API UCameraWorldSubsystem : public UTickableWorldSubsystem
 {
@@ -25,7 +27,44 @@ protected:
 	UPROPERTY()
 	TArray<UObject*> FollowTargets;
 
+	UPROPERTY()
+	FVector2D CameraBoundsMin;
+	
+	UPROPERTY()
+	FVector2D CameraBoundsMax;
+	
+	UPROPERTY()
+	float CameraBoundsYProjectionCenter;
+
+	AActor* FindCameraBoundsActor();
+
+	void InitCameraBounds(AActor* CameraBoundsActor);
+	void ClampPositionIntoCameraBounds(FVector& Position);
+
+	void GetViewportBounds(FVector2D& OutViewportBoundsMin, FVector2D& OutViewportBoundsMax);
+	FVector CalculateWorldPositionFromViewportPosition(const FVector2D& ViewportPosition);
+	
+
 	void TickUpdateCameraPosition(float DeltaTime);
+	void TickUpdateCameraZoom(float DeltaTime);
 	FVector CalculateAveragePositionBetweenTargets();
+	float CalculateGreatestDistanceBetweenTargets();
 	UCameraComponent* FindCameraByTag(const FName& Tag) const;
+	TObjectPtr<const UCameraSettings> CameraSettings;
+
+protected:
+	UPROPERTY()
+	float CameraZoomYMin = 0.0f;
+
+	UPROPERTY()
+	float CameraZoomYMax = 0.0f;
+
+	UPROPERTY()
+	float CameraZoomDistanceBetweenTargetsMin = 300.0f;
+	
+	UPROPERTY()
+	float CameraZoomDistanceBetweenTargetsMax = 1500.0f;
+
+	UFUNCTION()
+	void InitCameraZoomParameters();
 };
