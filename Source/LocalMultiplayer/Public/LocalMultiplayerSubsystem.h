@@ -4,6 +4,7 @@
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "LocalMultiplayerSubsystem.generated.h"
 
+class ULocalMultiplayerSettings;
 enum class ELocalMultiplayerInputMappingType;
 
 UCLASS()
@@ -21,8 +22,9 @@ public:
 	int GetAssignedPlayerIndexFromGamepadDeviceID(int DeviceID);
 	int AssignNewPlayerToGamepadDeviceID(int DeviceID);
 	void AssignGamepadInputMapping(int PlayerIndex, ELocalMultiplayerInputMappingType MappingType) const;
-
-protected:
+	
+	TObjectPtr<const ULocalMultiplayerSettings> LocalMultiplayerSettings;
+	
 	UPROPERTY()
 	uint8 LastAssignedPlayerIndex = -1;
 

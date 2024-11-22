@@ -6,6 +6,7 @@
 #include "CameraWorldSubsystem.generated.h"
 
 class UCameraSettings;
+class UEnhancedInputLocalPlayerSubsystem;
 
 UCLASS()
 class SMASHUE_API UCameraWorldSubsystem : public UTickableWorldSubsystem

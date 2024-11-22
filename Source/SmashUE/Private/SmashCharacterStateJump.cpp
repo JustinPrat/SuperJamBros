@@ -11,9 +11,6 @@ ESmashCharacterStateID USmashCharacterStateJump::GetStateID()
 
 void USmashCharacterStateJump::StateEnter(ESmashCharacterStateID PreviousStateID)
 {
-	// Character->AddMovementInput(FVector::UpVector, JumpHeight/JumpDuration);
-	// Character->Jump();
-
 	float InitialVelocity = 2 * JumpHeight / (JumpDuration/2);
 	float gravity = -2 * JumpHeight / (JumpDuration/2 * JumpDuration/2);
 	

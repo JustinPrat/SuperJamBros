@@ -20,7 +20,7 @@ UInputMappingContext* FLocalMultiplayerProfileData::GetIMCFromType(ELocalMultipl
 	switch (MappingType)
 	{
 		case ELocalMultiplayerInputMappingType::InGame:
-			return IMCMenu;
+			return IMCInGame;
 		case ELocalMultiplayerInputMappingType::Menu:
 			return IMCMenu;
 	}

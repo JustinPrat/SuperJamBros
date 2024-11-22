@@ -46,7 +46,7 @@ public:
 	int FindKeyboardProfileIndexFromKey (const FKey& Key, ELocalMultiplayerInputMappingType MappingType) const;
 
 	UPROPERTY(Config, EditAnywhere, Category = "LocalMultiplayer")
-	TArray<FLocalMultiplayerProfileData> GamepadProfileData;
+	FLocalMultiplayerProfileData GamepadProfileData;
 
 	UPROPERTY(Config, EditAnywhere, Category = "LocalMultiplayer")
 	int NbMaxGamepads = 4;

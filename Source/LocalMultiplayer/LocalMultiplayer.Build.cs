@@ -9,8 +9,7 @@ public class LocalMultiplayer : ModuleRules
         PublicDependencyModuleNames.AddRange(
             new string[]
             {
-                "Core",
-                "DeveloperSettings"
+                "Core"
             }
         );
 
@@ -21,7 +20,9 @@ public class LocalMultiplayer : ModuleRules
                 "Engine",
                 "Slate",
                 "SlateCore",
-                "EnhancedInput"
+                "EnhancedInput",
+                "DeveloperSettings",
+                "InputCore"
             }
         );
     }

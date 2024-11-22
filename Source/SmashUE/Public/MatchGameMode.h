@@ -25,6 +25,7 @@ class SMASHUE_API AMatchGameMode : public AGameModeBase
 	USmashCharacterInputData* LoadInputDataFromConfig();
 	UInputMappingContext* LoadInputMappingContextFromConfig();
 	float LoadInputThresholdFromConfig();
+	void CreateAndInitPlayers() const;
 	
 	void FindPlayerStartActorsInArena(TArray<AArenaPlayerStart*>& ResultsActors);
 	void SpawnCharacters(const TArray<AArenaPlayerStart*>& SpawnPoints);
