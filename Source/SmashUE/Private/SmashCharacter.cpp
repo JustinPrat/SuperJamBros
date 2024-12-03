@@ -91,6 +91,8 @@ void ASmashCharacter::SetupMappingContextIntoController() const
 	if (InputSystem == nullptr) return;
 
 	InputSystem->AddMappingContext(InputMappingContext, 0);
+
+	
 }
 
 float ASmashCharacter::GetInputMoveX() const
@@ -149,6 +151,32 @@ void ASmashCharacter::BindInputMoveXAxisAndActions(UEnhancedInputComponent* Enha
 			&ASmashCharacter::OnInputJump
 			);
 	}
+
+	if (InputData->InputActionSpecialMove)
+	{
+		EnhancedInputComponent->BindAction(
+			InputData->InputActionSpecialMove,
+			ETriggerEvent::Started,
+			this,
+			&ASmashCharacter::OnInputSpecialMove);
+	}
+}
+
+void ASmashCharacter::OnInputSpecialMove(const FInputActionValue& InputActionValue)
+{
+	InputSpecialEvent.Broadcast();
+}
+
+void ASmashCharacter::HitDamage(float DamageAmount)
+{
+	Damage += DamageAmount;
+	GEngine->AddOnScreenDebugMessage(-1, 2.f, FColor::Blue, FString::Printf(TEXT("Damage : %f"), Damage));
+}
+
+void ASmashCharacter::KnockBack(FVector Direction)
+{
+	float DamageRamp = FMathf::Lerp(0.1f, 1.0f, Damage/200);
+	LaunchCharacter(Direction * (DamageRamp * 500) + FVector::UpVector * (DamageRamp * 400),true, true);
 }
 
 void ASmashCharacter::OnInputMoveX(const FInputActionValue& InputActionValue)

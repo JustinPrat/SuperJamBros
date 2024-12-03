@@ -9,5 +9,6 @@ enum class ESmashCharacterStateID : uint8
 	Walk,
 	Run,
 	Jump,
-	Fall
+	Fall,
+	SpecialMove
 };

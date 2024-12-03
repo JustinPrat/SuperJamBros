@@ -69,7 +69,7 @@ bool ULocalMultiplayerGameViewportClient::InputAxis(FViewport* InViewport, FInpu
 		int NewPlayerID = LocalMultiplayerSubsystem->AssignNewPlayerToGamepadDeviceID(InputDevice.GetId());
 		LocalMultiplayerSubsystem->AssignGamepadInputMapping(NewPlayerID, ELocalMultiplayerInputMappingType::InGame);
 	}
-	else
+	else if (PlayerID != -1)
 	{
 		APlayerController* PlayerController = UGameplayStatics::GetPlayerControllerFromID(GetWorld(), PlayerID);
 		FInputKeyParams InputKeyParams (Key, IE_Axis, Delta, true, InputDevice);

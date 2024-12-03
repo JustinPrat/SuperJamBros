@@ -11,6 +11,8 @@ ESmashCharacterStateID USmashCharacterStateJump::GetStateID()
 
 void USmashCharacterStateJump::StateEnter(ESmashCharacterStateID PreviousStateID)
 {
+	Super::StateEnter(PreviousStateID);
+	
 	float InitialVelocity = 2 * JumpHeight / (JumpDuration/2);
 	float gravity = -2 * JumpHeight / (JumpDuration/2 * JumpDuration/2);
 	
@@ -22,6 +24,8 @@ void USmashCharacterStateJump::StateEnter(ESmashCharacterStateID PreviousStateID
 
 void USmashCharacterStateJump::StateTick(float DeltaTime)
 {
+	Super::StateTick(DeltaTime);
+	
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Cyan, Character->GetCharacterMovement()->IsFalling() ? "falling true" : " falling false");
 	//GEngine->AddOnScreenDebugMessage(-1, 3.0f, FColor::Cyan, Character->GetVelocity().ToString());
 	if(Character->GetVelocity().Z < 0)
@@ -32,5 +36,5 @@ void USmashCharacterStateJump::StateTick(float DeltaTime)
 
 void USmashCharacterStateJump::StateExit(ESmashCharacterStateID NextStateID)
 {
-	
+	Super::StateExit(NextStateID);
 }

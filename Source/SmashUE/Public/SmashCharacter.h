@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -110,5 +108,26 @@ public:
 	virtual bool IsFollowable() override;
 
 private:
+#pragma endregion
+
+#pragma region Special Move
+public:
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE(FInputSpecialEvent);
+
+	UPROPERTY()
+	FInputSpecialEvent InputSpecialEvent;
+
+	void OnInputSpecialMove(const FInputActionValue& InputActionValue);
+	
+#pragma endregion
+
+#pragma region Damage
+public:
+	UPROPERTY(EditAnywhere)
+	float Damage = 0.0f;
+	void HitDamage(float DamageAmount);
+
+	void KnockBack(FVector Direction);
+	
 #pragma endregion
 };

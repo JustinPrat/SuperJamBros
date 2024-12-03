@@ -16,6 +16,9 @@ public:
 	void OnInputMoveXFast(float InputMoveX);
 	UFUNCTION()
 	void OnInputJump(float InputJump);
+
+	UFUNCTION()
+	void OnInputSpecialMove();
 	
 	virtual void StateEnter(ESmashCharacterStateID PreviousStateID) override;
 	virtual void StateExit(ESmashCharacterStateID NextStateID) override;
