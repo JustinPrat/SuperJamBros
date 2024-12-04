@@ -48,6 +48,7 @@ void ASmashCharacter::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	TickStateMachine(DeltaTime);
     RotateMeshUsingOrientX();
+	
 }
 
 // Called to bind functionality to input

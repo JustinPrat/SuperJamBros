@@ -17,7 +17,7 @@ void AEnergyBall::BeginPlay()
 void AEnergyBall::CollideWithOther(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
 	UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, "EnergyBall::CollideWithOther : " + OtherActor->GetName());
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Red, "EnergyBall::CollideWithOther : " + OtherActor->GetName());
 	ASmashCharacter* Character = Cast<ASmashCharacter>(OtherActor);
 	if (Character)
 	{

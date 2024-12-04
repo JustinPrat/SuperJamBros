@@ -44,7 +44,6 @@ protected:
 
 	void GetViewportBounds(FVector2D& OutViewportBoundsMin, FVector2D& OutViewportBoundsMax);
 	FVector CalculateWorldPositionFromViewportPosition(const FVector2D& ViewportPosition);
-	
 
 	void TickUpdateCameraPosition(float DeltaTime);
 	void TickUpdateCameraZoom(float DeltaTime);

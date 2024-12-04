@@ -1,5 +1,4 @@
 #include "SmashCharacterStateSpecialMove.h"
-
 #include "SmashCharacter.h"
 #include "SmashCharacterStateID.h"
 #include "SmashCharacterStateMachine.h"
@@ -20,6 +19,8 @@ void USmashCharacterStateSpecialMove::Shoot()
 	Character->PlayAnimMontage(ActionAnim);
 	FVector dir = FVector(Character->GetOrientX(), 0, 0);
 	dir.Normalize();
+
+	EnergyBallInstance->Direction = dir;
 	EnergyBallInstance->ReleaseEnergy(BallSpeed, FMathf::Lerp(MinDamage, MaxDamage, TimeSinceStartCharge/TimeToCharge));
 	GenerateNewBall();
 	
@@ -41,6 +42,10 @@ void USmashCharacterStateSpecialMove::StateEnter(ESmashCharacterStateID Previous
 	{
 		EnergyBallState = Charging;
 		TimeSinceStartCharge = 0;
+
+		FVector dir = FVector(Character->GetOrientX(), 0, 0);
+		dir.Normalize();
+		EnergyBallInstance->Direction = dir;
 	}
 }
 
@@ -84,13 +89,9 @@ void USmashCharacterStateSpecialMove::GenerateNewBall()
 {
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
-
-	FVector dir = FVector(Character->GetOrientX(), 0, 0);
-	dir.Normalize();
 	
 	EnergyBallInstance = GetWorld()->SpawnActor<AEnergyBall>(EnergyBall, SpawnParams);
 	EnergyBallInstance->AttachToComponent(Gun, FAttachmentTransformRules::SnapToTargetNotIncludingScale, "GunSocket");
 	EnergyBallInstance->SetActorScale3D(FVector::Zero());
 	EnergyBallInstance->SetActorEnableCollision(false);
-	EnergyBallInstance->Direction = dir;
 }
